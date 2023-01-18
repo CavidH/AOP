@@ -15,7 +15,7 @@ namespace CastleDynamicProxyApp
         static void Main(string[] args)
         {
             var proxy = new ProxyGenerator();
-            var aspect = proxy.CreateClassProxy<BusinessModule>(new InterceptorAspect());
+            var aspect = proxy.CreateClassProxy<BusinessModule>(new MyMethodInterceptor());
             aspect.Print("salam");
         }
     }
