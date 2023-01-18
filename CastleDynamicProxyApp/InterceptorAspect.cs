@@ -2,7 +2,7 @@
 
 namespace CastleDynamicProxyApp
 {
-    internal class InterceptorAspect : Attribute, IInterceptor
+    internal class InterceptorAspect : Attribute,IInterceptor
     {
         public void Intercept(IInvocation invocation)
         {
