@@ -3,6 +3,7 @@
 public class BusinessModule : IBusinessModule
 {
 
+    [MyMethodInterceptor(Priority = 4)]
     public virtual void Print(string text)
     {
         Console.WriteLine(text);
