@@ -23,9 +23,12 @@ namespace CastleDynamicProxyApp
 
             var builder = new ContainerBuilder();
             builder.RegisterType<BusinessModule>()
-                .As<BusinessModule>()
+                .As<IBusinessModule>()
                 .EnableInterfaceInterceptors(new ProxyGenerationOptions() { Selector = new AspectInterceptorSelect() })
                 .SingleInstance();
+            var container = builder.Build();
+            var willBeIntercepted = container.Resolve<IBusinessModule>();
+            willBeIntercepted.Print("salam");
         }
     }
 }
