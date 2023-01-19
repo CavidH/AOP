@@ -1,9 +1,9 @@
 ﻿using Castle.DynamicProxy;
 using Core.Interseptors;
 
-namespace InvocationApp.Aspects
+namespace Core.Aspects
 {
-    class InterceptionAspect : MethodInterception
+    public class InterceptionAspect : MethodInterception
     {
         public override void OnBefore(IInvocation invocation)
         {

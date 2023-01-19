@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Threading.Channels;
 using Castle.DynamicProxy;
 using Core.Interseptors;
 
-namespace InvocationApp.Aspects
+namespace Core.Aspects
 {
-    class DefensiveProgrammingAspect : MethodInterception
+    public class DefensiveProgrammingAspect : MethodInterception
     {
         public override void OnBefore(IInvocation invocation)
         {
@@ -12,12 +13,16 @@ namespace InvocationApp.Aspects
             NullCheck(invocation);
             Console.WriteLine("NullCheck  End.  Method:{0}", invocation.Method.Name);
         }
+        public override void OnException(IInvocation invocation, Exception ex)
+        {
+            Console.WriteLine("Boomb jsjsj{0}",ex.Message);
+        }
 
         void NullCheck(IInvocation invocation)
         {
             foreach (var argument in invocation.Arguments)
             {
-                if (argument is null) throw new ArgumentNullException();
+                if (argument is null)  throw new ArgumentNullException();
             }
         }
     }
