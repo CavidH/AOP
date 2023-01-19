@@ -1,4 +1,7 @@
-﻿using Castle.DynamicProxy;
+﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
+using Castle.DynamicProxy;
+using Core.Interseptors;
 
 namespace CastleDynamicProxyApp
 {
@@ -14,9 +17,15 @@ namespace CastleDynamicProxyApp
     {
         static void Main(string[] args)
         {
-            var proxy = new ProxyGenerator();
-            var aspect = proxy.CreateClassProxy<BusinessModule>(new MyMethodInterceptor());
-            aspect.Print("salam");
+            //var proxy = new ProxyGenerator();
+            //var aspect = proxy.CreateClassProxy<BusinessModule>(new MyMethodInterceptor());
+            //aspect.Print("salam");
+
+            var builder = new ContainerBuilder();
+            builder.RegisterType<BusinessModule>()
+                .As<BusinessModule>()
+                .EnableInterfaceInterceptors(new ProxyGenerationOptions() { Selector = new AspectInterceptorSelect() })
+                .SingleInstance();
         }
     }
 }
